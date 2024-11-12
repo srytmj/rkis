@@ -12,31 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('akun', function (Blueprint $table) {
-            $table->id();
-            $table->string('no_akun');
+            $table->id('no_akun')->unique();
             $table->string('nama_akun');
-            $table->enum('tipe_akun', ['d', 'k']);
+            $table->enum('tipe_akun', ['debit', 'kredit']);
             $table->timestamps();
         });
 
         DB::table('akun')->insert([
             'no_akun' => '111',
             'nama_akun' => 'Kas',
-            'tipe_akun' => 'd',
+            'tipe_akun' => 'debit',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('akun')->insert([
             'no_akun' => '411',
             'nama_akun' => 'Pendanaan',
-            'tipe_akun' => 'k',
+            'tipe_akun' => 'kredit',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         DB::table('akun')->insert([
             'no_akun' => '511',
             'nama_akun' => 'Biaya Operasional',
-            'tipe_akun' => 'd',
+            'tipe_akun' => 'debit',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

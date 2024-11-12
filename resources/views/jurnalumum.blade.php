@@ -127,7 +127,7 @@
                             let kredit = 0;
 
                             // logika buat nentuin debet ato kredit berdasarkan 'ket'
-                            if (item.posisi === 'd') {
+                            if (item.posisi === 'debit') {
                                 debet = item.saldo; // buat masukin saldo ke debit
 
                                 $('#jurnalTableBody').append(`
@@ -139,7 +139,7 @@
                                 <td></td>
                             </tr>
                         `);
-                            } else if (item.posisi === 'k') {
+                            } else if (item.posisi === 'kredit') {
                                 kredit = item.saldo; // buat masukin saldo ke kredit
 
                                 $('#jurnalTableBody').append(`

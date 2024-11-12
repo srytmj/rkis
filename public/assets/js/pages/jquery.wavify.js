@@ -126,7 +126,7 @@
         //  Redraw for resize with debounce
         //
         var redraw = debounce(function() {
-            wave.attr('d', '');
+            wave.attr('debit', '');
             points = [];
             totalTime = 0;
             width = $(settings.container).width();

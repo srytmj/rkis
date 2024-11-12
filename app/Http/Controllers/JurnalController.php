@@ -84,7 +84,7 @@ class JurnalController extends Controller
     
         // nentuin tipe akun
         $accountType = Akun::where('no_akun', $noAkun)->value('tipe_akun');
-        $posisiAwal = $accountType == 'd' ? 'd' : 'k';
+        $posisiAwal = $accountType == 'debit' ? 'debit' : 'kredit';
     
         // ambil data dari bulan sebelumnya
         $previousTransactions = Jurnal::whereMonth('tanggal', '=', $previousMonth)
@@ -93,10 +93,10 @@ class JurnalController extends Controller
             ->get();
     
         // itung saldo awal
-        $totalDebet = $previousTransactions->where('posisi', 'd')->sum('saldo');
-        $totalKredit = $previousTransactions->where('posisi', 'k')->sum('saldo');
+        $totalDebet = $previousTransactions->where('posisi', 'debit')->sum('saldo');
+        $totalKredit = $previousTransactions->where('posisi', 'kredit')->sum('saldo');
     
-        if ($posisiAwal == 'd') {
+        if ($posisiAwal == 'debit') {
             $saldoAwal = $totalDebet - $totalKredit;
         } else {
             $saldoAwal = $totalKredit - $totalDebet;

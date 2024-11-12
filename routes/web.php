@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +15,8 @@ Route::get('/', function () {
 Route::resource('/dashboard', KasController::class);
 
 Route::resource('/akun', AkunController::class);
+
+Route::resource('/transaksi', TransaksiController::class);
 
 // Route untuk laporan
 Route::get('/jurnal/umum', [App\Http\Controllers\JurnalController::class,'jurnalumum'])->name('jurnalumum');

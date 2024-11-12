@@ -1428,17 +1428,17 @@
 
     function getSetWeek(input) {
         var week = this.localeData().week(this);
-        return input == null ? week : this.add((input - week) * 7, 'd');
+        return input == null ? week : this.add((input - week) * 7, 'debit');
     }
 
     function getSetISOWeek(input) {
         var week = weekOfYear(this, 1, 4).week;
-        return input == null ? week : this.add((input - week) * 7, 'd');
+        return input == null ? week : this.add((input - week) * 7, 'debit');
     }
 
     // FORMATTING
 
-    addFormatToken('d', 0, 'do', 'day');
+    addFormatToken('debit', 0, 'do', 'day');
 
     addFormatToken('dd', 0, 0, function (format) {
         return this.localeData().weekdaysMin(this, format);
@@ -1457,7 +1457,7 @@
 
     // ALIASES
 
-    addUnitAlias('day', 'd');
+    addUnitAlias('day', 'debit');
     addUnitAlias('weekday', 'e');
     addUnitAlias('isoWeekday', 'E');
 
@@ -1468,7 +1468,7 @@
 
     // PARSING
 
-    addRegexToken('d', match1to2);
+    addRegexToken('debit', match1to2);
     addRegexToken('e', match1to2);
     addRegexToken('E', match1to2);
     addRegexToken('dd', function (isStrict, locale) {
@@ -1491,7 +1491,7 @@
         }
     });
 
-    addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
+    addWeekParseToken(['debit', 'e', 'E'], function (input, week, config, token) {
         week[token] = toInt(input);
     });
 
@@ -1715,7 +1715,7 @@
         var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
         if (input != null) {
             input = parseWeekday(input, this.localeData());
-            return this.add(input - day, 'd');
+            return this.add(input - day, 'debit');
         } else {
             return day;
         }
@@ -1726,7 +1726,7 @@
             return input != null ? this : NaN;
         }
         var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
-        return input == null ? weekday : this.add(input - weekday, 'd');
+        return input == null ? weekday : this.add(input - weekday, 'debit');
     }
 
     function getSetISODayOfWeek(input) {
@@ -1870,7 +1870,7 @@
 
     addFormatToken('H', ['HH', 2], 0, 'hour');
     addFormatToken('h', ['hh', 2], 0, hFormat);
-    addFormatToken('k', ['kk', 2], 0, kFormat);
+    addFormatToken('kredit', ['kk', 2], 0, kFormat);
 
     addFormatToken('hmm', 0, 0, function () {
         return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
@@ -1928,7 +1928,7 @@
     addRegexToken('A', matchMeridiem);
     addRegexToken('H', match1to2);
     addRegexToken('h', match1to2);
-    addRegexToken('k', match1to2);
+    addRegexToken('kredit', match1to2);
     addRegexToken('HH', match1to2, match2);
     addRegexToken('hh', match1to2, match2);
     addRegexToken('kk', match1to2, match2);
@@ -1939,7 +1939,7 @@
     addRegexToken('Hmmss', match5to6);
 
     addParseToken(['H', 'HH'], HOUR);
-    addParseToken(['k', 'kk'], function (input, array, config) {
+    addParseToken(['kredit', 'kk'], function (input, array, config) {
         var kInput = toInt(input);
         array[HOUR] = kInput === 24 ? 0 : kInput;
     });
@@ -2930,7 +2930,7 @@
         var res = new Moment(checkOverflow(prepareConfig(config)));
         if (res._nextDay) {
             // Adding is smart enough around DST
-            res.add(1, 'd');
+            res.add(1, 'debit');
             res._nextDay = undefined;
         }
 
@@ -3646,10 +3646,10 @@
                 'M',
                 'days',
                 'day',
-                'd',
+                'debit',
                 'dates',
                 'date',
-                'D',
+                'debit',
                 'hours',
                 'hour',
                 'h',
@@ -4697,18 +4697,18 @@
 
     // FORMATTING
 
-    addFormatToken('D', ['DD', 2], 'Do', 'date');
+    addFormatToken('debit', ['DD', 2], 'Do', 'date');
 
     // ALIASES
 
-    addUnitAlias('date', 'D');
+    addUnitAlias('date', 'debit');
 
     // PRIORITY
     addUnitPriority('date', 9);
 
     // PARSING
 
-    addRegexToken('D', match1to2);
+    addRegexToken('debit', match1to2);
     addRegexToken('DD', match1to2, match2);
     addRegexToken('Do', function (isStrict, locale) {
         // TODO: Remove "ordinalParse" fallback in next major release.
@@ -4717,7 +4717,7 @@
             : locale._dayOfMonthOrdinalParseLenient;
     });
 
-    addParseToken(['D', 'DD'], DATE);
+    addParseToken(['debit', 'DD'], DATE);
     addParseToken('Do', function (input, array) {
         array[DATE] = toInt(input.match(match1to2)[0]);
     });
@@ -4754,7 +4754,7 @@
             Math.round(
                 (this.clone().startOf('day') - this.clone().startOf('year')) / 864e5
             ) + 1;
-        return input == null ? dayOfYear : this.add(input - dayOfYear, 'd');
+        return input == null ? dayOfYear : this.add(input - dayOfYear, 'debit');
     }
 
     // FORMATTING
@@ -5347,7 +5347,7 @@
         asSeconds = makeAs('s'),
         asMinutes = makeAs('m'),
         asHours = makeAs('h'),
-        asDays = makeAs('d'),
+        asDays = makeAs('debit'),
         asWeeks = makeAs('w'),
         asMonths = makeAs('M'),
         asQuarters = makeAs('Q'),
@@ -5401,7 +5401,7 @@
             seconds = round(duration.as('s')),
             minutes = round(duration.as('m')),
             hours = round(duration.as('h')),
-            days = round(duration.as('d')),
+            days = round(duration.as('debit')),
             months = round(duration.as('M')),
             weeks = round(duration.as('w')),
             years = round(duration.as('y')),
@@ -5412,7 +5412,7 @@
                 (minutes < thresholds.m && ['mm', minutes]) ||
                 (hours <= 1 && ['h']) ||
                 (hours < thresholds.h && ['hh', hours]) ||
-                (days <= 1 && ['d']) ||
+                (days <= 1 && ['debit']) ||
                 (days < thresholds.d && ['dd', days]);
 
         if (thresholds.w != null) {
@@ -5553,7 +5553,7 @@
             'P' +
             (years ? ymSign + years + 'Y' : '') +
             (months ? ymSign + months + 'M' : '') +
-            (days ? daysSign + days + 'D' : '') +
+            (days ? daysSign + days + 'debit' : '') +
             (hours || minutes || seconds ? 'T' : '') +
             (hours ? hmsSign + hours + 'H' : '') +
             (minutes ? hmsSign + minutes + 'M' : '') +

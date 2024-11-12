@@ -41,17 +41,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($akuns as $akun)
-                                        <tr class="datarow" data-id="{{ $akun->id }}">
+                                        <tr class="datarow" data-id="{{ $akun->no_akun }}">
                                             <td>{{ $akun->no_akun }}</td>
                                             <td>{{ $akun->nama_akun }}</td>
-                                            <td>{{ $akun->tipe_akun == 'd' ? 'Debit' : 'Kredit' }}</td>
+                                            <td>{{ $akun->tipe_akun == 'debit' ? 'Debit' : 'Kredit' }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                                    data-bs-target="#editModal{{ $akun->id }}">
+                                                    data-bs-target="#editModal{{ $akun->no_akun }}">
                                                     Edit
                                                 </button>
                                                 <!-- Button Hapus -->
-                                                <form action="{{ route('akun.destroy', $akun->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('akun.destroy', $akun->no_akun) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Hapus</button>
@@ -60,7 +60,7 @@
                                         </tr>
 
                                         <!-- Modal Edit setiap data -->
-                                        <div class="modal fade" id="editModal{{ $akun->id }}" tabindex="-1"
+                                        <div class="modal fade" id="editModal{{ $akun->no_akun }}" tabindex="-1"
                                             aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -70,7 +70,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('akun.update', $akun->id) }}" method="POST">
+                                                        <form action="{{ route('akun.update', $akun->no_akun) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group mb-3">
@@ -87,10 +87,10 @@
                                                             </div>
                                                             <div class="form-group mb-3">
                                                                 <label for="tipe_akun">Tipe Akun</label><br>
-                                                                <input type="radio" id="debit{{ $akun->id }}" name="tipe_akun" value="d" {{ $akun->tipe_akun == 'd' ? 'checked' : '' }}>
-                                                                <label for="debit{{ $akun->id }}">Debit</label>
-                                                                <input type="radio" id="kredit{{ $akun->id }}" name="tipe_akun" value="k" {{ $akun->tipe_akun == 'k' ? 'checked' : '' }}>
-                                                                <label for="kredit{{ $akun->id }}">Kredit</label>
+                                                                <input type="radio" id="debit{{ $akun->no_akun }}" name="tipe_akun" value="d" {{ $akun->tipe_akun == 'debit' ? 'checked' : '' }}>
+                                                                <label for="debit{{ $akun->no_akun }}">Debit</label>
+                                                                <input type="radio" id="kredit{{ $akun->no_akun }}" name="tipe_akun" value="k" {{ $akun->tipe_akun == 'kredit' ? 'checked' : '' }}>
+                                                                <label for="kredit{{ $akun->no_akun }}">Kredit</label>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"

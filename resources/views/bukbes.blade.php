@@ -128,7 +128,7 @@
                         $('#judulPeriode').text(`Periode ${bulan}`);                        
 
                         // nentuin saldo awal berdasarkan posisi awal
-                        if (posisiAwal === 'd') {
+                        if (posisiAwal === 'debit') {
                             $('#bukuBesarTableBody').append(`
                     <tr>
                         <td>-</td>
@@ -140,7 +140,7 @@
                         <td></td>
                     </tr>
                 `);
-                        } else if (posisiAwal === 'k') {
+                        } else if (posisiAwal === 'kredit') {
                             $('#bukuBesarTableBody').append(`
                     <tr>
                         <td>-</td>
@@ -161,7 +161,7 @@
                             let debet = 0;
                             let kredit = 0;
 
-                            if (item.posisi === 'd') {
+                            if (item.posisi === 'debit') {
                                 debet = item.saldo;
                                 $('#bukuBesarTableBody').append(`
                         <tr>
@@ -171,7 +171,7 @@
                             <td>${formatRupiah(debet)}</td>
                             <td></td>
                     `);
-                            } else if (item.posisi === 'k') {
+                            } else if (item.posisi === 'kredit') {
                                 kredit = item.saldo;
                                 $('#bukuBesarTableBody').append(`
                         <tr>
@@ -184,14 +184,14 @@
                             }
 
                             // apdet saldo berdasarkan posisi awal dan transaksi
-                            if (posisiAwal === 'd') {
+                            if (posisiAwal === 'debit') {
                                 totalSaldo += debet - kredit;
                                 // apdet saldo di baris tabel
                                 $('#bukuBesarTableBody').last().find('tr:last').append(
                                     `<td>${formatRupiah(totalSaldo)}</td>
                             <td></tr>`
                                 );
-                            } else if (posisiAwal === 'k') {
+                            } else if (posisiAwal === 'kredit') {
                                 totalSaldo += kredit - debet;
                                 // apdet saldo di baris tabel
                                 $('#bukuBesarTableBody').last().find('tr:last').append(
@@ -202,9 +202,9 @@
                         });
 
                         // tampilin total saldo di bagian footer tabel
-                        if (posisiAwal === 'd') {
+                        if (posisiAwal === 'debit') {
                             $('#totalSaldoD').text(formatRupiah(totalSaldo));
-                        } else if (posisiAwal === 'k') {
+                        } else if (posisiAwal === 'kredit') {
                             $('#totalSaldoK').text(formatRupiah(totalSaldo));
                         }
                     },

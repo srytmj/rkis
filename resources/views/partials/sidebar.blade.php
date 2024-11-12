@@ -38,6 +38,7 @@
                 <ul class="nav pcoded-inner-navbar">
                         <li class="nav-item"><a href="{{route('dashboard.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a></li>
                         <li class="nav-item"><a href="{{route('akun.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Akun</span></a></li>
+                        <li class="nav-item"><a href="{{route('transaksi.index')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Transaksi</span></a></li>
 
                         <li class="nav-item pcoded-hasmenu">
                             <a class="nav-link">
